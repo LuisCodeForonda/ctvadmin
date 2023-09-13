@@ -40,7 +40,7 @@
                 </thead>
                 <tbody>
                     @foreach ($data as $item)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <tr wire:key="{{ $item->id }}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $item->titulo }}
@@ -49,7 +49,13 @@
                                 {{ $item->hora }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $item->horario }}
+                                @if ($item->horario == 'A')
+                                    Lunes a viernes
+                                @elseif($item->horario == 'B')
+                                    Sabados
+                                @else
+                                    Domingos
+                                @endif
                             </td>
                             <td class="">
                                 <button type="button" wire:click="edit({{ $item->id }})" class="text-blue-700 hover:text-blue-800 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Editar</button>

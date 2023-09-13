@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('titulo');
             $table->time('hora');
-            $table->char('horario', 1);
+            $table->char('horario', 1)->default('A');
             $table->timestamps();
         });
     }

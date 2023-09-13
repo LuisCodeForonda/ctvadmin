@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Programacion;
+use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -10,7 +11,17 @@ class ProgramacionComponent extends Component
 {
     use WithPagination;
 
-    public $id, $titulo, $hora, $horario;
+    public $id;
+
+    #[Rule('required|max:50')]
+    public $titulo = '';
+
+    #[Rule('required')]
+    public $hora = '';
+
+    #[Rule('')]
+    public $horario = '';
+
     public $modal = false;
     public $paginado = 5;
     public $search = '';
@@ -29,11 +40,14 @@ class ProgramacionComponent extends Component
     }
 
     public function save(){
+
+        $this->validate();
+
         Programacion::updateOrCreate(['id'=> $this->id],
         [
             'titulo' => $this->titulo,
             'hora' => $this->hora,
-            'horario' => $this->horario
+            'horario' => $this->horario,
         ]);
 
         $this->cerrarModal();
@@ -58,7 +72,7 @@ class ProgramacionComponent extends Component
         $this->id = '';
         $this->titulo = '';
         $this->hora = '';
-        $this->horario = '';
+        $this->horario = 'A';
     }
 
     public function render()
