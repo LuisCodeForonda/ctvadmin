@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
 
     //
     Route::view('/programacion','programacion')->name('programacion');
+    Route::view('/banner','banner')->name('banner');
 });
 
 require __DIR__.'/auth.php';
