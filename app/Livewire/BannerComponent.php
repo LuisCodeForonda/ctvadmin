@@ -5,10 +5,12 @@ namespace App\Livewire;
 use App\Models\Banner;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class BannerComponent extends Component
 {
+    use WithFileUploads;
     use WithPagination;
 
     public $id;
@@ -16,8 +18,8 @@ class BannerComponent extends Component
     #[Rule('required')]
     public $titulo = '';
 
-    #[Rule('image|max:1024')]
-    public $image = '';
+    #[Rule('required|image|max:1024')]
+    public $image;
 
     public $modal = false;
 
@@ -37,6 +39,10 @@ class BannerComponent extends Component
     public function save(){
 
         $this->validate();
+
+        if($this->image){
+            $this->image = $this->image->store('uploads', 'public');
+        }
 
         Banner::updateOrCreate(['id'=> $this->id],
         [

@@ -20,15 +20,32 @@
                         <input type="text" wire:model="titulo" id="first_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Titulo" required>
-                        <div class="text-red-600">@error('titulo') {{ $message }} @enderror</div>
+                        <div class="text-red-600">
+                            @error('titulo')
+                                {{ $message }}
+                            @enderror
+                        </div>
                     </div>
                     <div class="relative z-0 w-full mb-6 group">
                         <label for="first_name"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titulo</label>
-                        <input type="text" wire:model="titulo" id="first_name"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Imagen</label>
+                        <input type="file" wire:model="image" id="first_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Titulo" required>
-                        <div class="text-red-600">@error('titulo') {{ $message }} @enderror</div>
+                            placeholder="image" required>
+                        <div class="text-red-600">
+                            @error('image')
+                                {{ $message }}
+                            @enderror
+                        </div>
+                        <div class="mt-2">
+                            <div wire:loading wire:target="image">
+                                Cargando...
+                            </div>
+                            @if ($image)
+                                <img src="{{ $image->temporaryUrl() }}" class="w-64 h-56 m-auto"> 
+                            @endif
+                        </div>
+                       
                     </div>
 
                     <!-- Modal footer -->
